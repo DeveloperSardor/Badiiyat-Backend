@@ -1,6 +1,7 @@
 import AuthorSchema from "../schemas/author.js";
 import BookSchema from '../schemas/books.js'
 import ErrorResp from "../utils/errorResp.js";
+import CategorySchema from "../schemas/category.js"
 
 export class AuthorContr {
   constructor() {}
