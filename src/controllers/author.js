@@ -41,7 +41,7 @@ export class AuthorContr {
         let keyword = search
           ? {
               $or: [
-                { firsname: { $regex: search, $options: "i" } },
+                { firstname: { $regex: search, $options: "i" } },
                 { lastname: { $regex: search, $options: "i" } },
               ],
             }
