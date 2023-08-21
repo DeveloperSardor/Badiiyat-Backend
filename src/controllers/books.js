@@ -22,7 +22,7 @@ export class BooksContr {
             },
           });
         }
-        let similarBooks = await BookSchema.find({category : findBook.category})
+        let similarBooks = await BookSchema.find({category : findBook.category}).populate("author")
         similarBooks = similarBooks.filter(el=>el._id != id)
         res.send({
           status: 200,
