@@ -48,7 +48,7 @@ export class AuthorContr {
           : {};
         const searchResults = await AuthorSchema.find(keyword).populate(
           "category"
-        );
+        ).sort({createdAt : -1});
 
         res.send({
           status: 200,
@@ -70,7 +70,7 @@ export class AuthorContr {
               uz: `${findCat.category} kategoriyasiga oid mualliflar`,
             },
             success: true,
-            data: await AuthorSchema.find({category}).populate('category'),
+            data: await AuthorSchema.find({category}).populate('category').sort({createdAt : -1}),
           });
       }
        else {
@@ -82,7 +82,7 @@ export class AuthorContr {
             uz: "Barcha mualliflar",
           },
           success: true,
-          data: await AuthorSchema.find().populate("category"),
+          data: await AuthorSchema.find().populate("category").sort({createdAt : -1}),
         });
       }
     } catch (error) {
