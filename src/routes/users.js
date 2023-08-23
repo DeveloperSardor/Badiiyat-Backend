@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UserContr } from "../controllers/user.js";
-import { checkToken, checkAdmin } from "../middleware/index.js";
+import { checkToken, checkIsAdmin } from "../middleware/index.js";
 
 const router = Router();
 
@@ -11,7 +11,7 @@ router.post('/login-admin', UserContr.LoginAdmin)
 
 // Get Method
 router.get('/profile', checkToken, UserContr.GetMyProfile)
-router.get('/view-users', checkAdmin, UserContr.GetUsersForAdmin)
+router.get('/view-users', checkIsAdmin, UserContr.GetUsersForAdmin)
 
 // Put Method
 router.put('/profile', checkToken, UserContr.EditMyProfile)
