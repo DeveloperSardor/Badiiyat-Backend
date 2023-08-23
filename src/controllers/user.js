@@ -114,6 +114,72 @@ export class UserContr{
 
     // SIGN IN 
 
+
+// Login Admin
+
+    static async LoginAdmin(req, res){
+        try{
+            const {email, password} = req.body;
+               if(!email){
+            return res.send({
+                status : 400,
+                success : false,
+                message : {
+                    ru : "Введите ваше электронная почта!",
+                    en : "Enter your email!",
+                    uz : "Emailingizni kiriting!"
+                }
+            })
+         }else if(!password){
+            return res.send({
+                status : 400,
+                success : false,
+                message : {
+                    ru : "Введите ваш пароль!",
+                    en : "Enter your password!",
+                    uz : "Parolingizni kiriting!"
+                }
+            })
+         }
+            const findUser = await UserSchema.findOne({email, password});
+              if(findUser == null){
+           return res.send({
+                status : 404,
+                message : {
+                    ru : "Пользователь не найден!",
+                    en : "Not found user!",
+                    uz : "Foydalanuvchi topilmadi!"
+                },
+                success : false
+            })
+         }else if(!findUser.isAdmin){
+          return res.send({
+                status : 404,
+                message : {
+                    ru : "Вы не админ!",
+                    en : "You are not admin!",
+                    uz : "Siz admin emassiz!"
+                },
+                success : false
+            })        
+         }
+               res.send({
+            status : 200,
+            message : {
+                ru : "Вы успешно вошли в систему!",
+                en : "You have successfuly logined!",
+                uz : "Siz muvofaqqiyatli kirdingiz!"
+            },
+            success : true,
+            data : findUser,
+            token : JWT.SIGN(findUser._id)
+         })
+        }catch(err){
+             res.send(ErrorResp(err))
+        }
+
+    }
+    
     static async Login(req, res){
         try{
          const {email, password} = req.body;
