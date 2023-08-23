@@ -235,6 +235,25 @@ export class UserContr{
 
     // GET Methods
 
+
+    static async GetAdmin(req, res){
+        try{
+         res.send({
+             status : 200,
+             success : true,
+             message : {
+                 ru : "Админ дата",
+                 en : "Admin datas",
+                 uz : "Admin malumotlari"
+             },
+             data : await UserSchema.findOne({isAdmin : true})
+         })
+        }catch(error){
+             res.send(ErrorResp(error))
+        }
+
+    }
+
 static async GetUsersForAdmin(req, res){
     try{
      res.send({
@@ -248,7 +267,7 @@ static async GetUsersForAdmin(req, res){
          data : await UserSchema.find().sort({createdAt : -1})
      })
     }catch(error){
-         res.send(ErrorResp(err))
+         res.send(ErrorResp(error))
     }
 
 }
