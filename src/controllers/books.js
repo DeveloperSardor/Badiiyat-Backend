@@ -22,7 +22,7 @@ export class BooksContr {
             },
           });
         }
-        let similarBooks = await BookSchema.find({category : findBook.category}).populate("author")
+        let similarBooks = await BookSchema.find({category : findBook.category}).populate("author").sort({createdAt : -1})
         similarBooks = similarBooks.filter(el=>el._id != id)
         res.send({
           status: 200,
@@ -33,7 +33,7 @@ export class BooksContr {
           },
           success: true,
           data : {
-            mainData : await BookSchema.findById(id).populate('author').populate('category'),
+            mainData : await BookSchema.findById(id).populate('author').populate('category').sort({createdAt : -1}),
             similarBooks
           }
         });
@@ -43,7 +43,7 @@ export class BooksContr {
         ]} : {}
 
         const searchResults = await BookSchema.find(keyword)
-        .populate('author').populate('category')
+        .populate('author').populate('category').sort({createdAt : -1})
 
         res.send({
             status : 200,
@@ -66,7 +66,7 @@ export class BooksContr {
               uz: `${findCat.category} kategoriyasiga oid kitoblar`,
             },
             success: true,
-            data: await BookSchema.find({category}).populate('author').populate('category'),
+            data: await BookSchema.find({category}).populate('author').populate('category').sort({createdAt : -1}),
           });
       }
        else {
@@ -78,7 +78,7 @@ export class BooksContr {
             uz: "Barcha kitoblar",
           },
           success: true,
-          data: await BookSchema.find().populate('category').populate('author'),
+          data: await BookSchema.find().populate('category').populate('author').sort({createdAt : -1}),
         });
       }
     } catch (error) {
