@@ -156,9 +156,9 @@ export class UserContr{
           return res.send({
                 status : 404,
                 message : {
-                    ru : "Вы не админ!",
-                    en : "You are not admin!",
-                    uz : "Siz admin emassiz!"
+                    ru : "Неправильный адрес электронной почты или пароль!",
+                    en : "Wrong email or password!",
+                    uz : "Email yoki parol xato!"
                 },
                 success : false
             })        
