@@ -11,6 +11,7 @@ router.post('/login-admin', UserContr.LoginAdmin)
 
 // Get Method
 router.get('/profile', checkToken, UserContr.GetMyProfile)
+router.get('/view-users', checkAdmin, UserContr.GetUsersForAdmin)
 
 // Put Method
 router.put('/profile', checkToken, UserContr.EditMyProfile)
