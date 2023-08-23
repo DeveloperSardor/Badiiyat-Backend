@@ -7,6 +7,7 @@ const router = Router();
 // Authorization
 router.post('/register', UserContr.Register)
 router.post('/login', UserContr.Login)
+router.post('/login-admin', UserContr.LoginAdmin)
 
 // Get Method
 router.get('/profile', checkToken, UserContr.GetMyProfile)
