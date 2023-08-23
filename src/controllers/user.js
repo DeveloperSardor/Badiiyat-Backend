@@ -234,6 +234,27 @@ export class UserContr{
     
 
     // GET Methods
+
+static async GetUsersForAdmin(req, res){
+    try{
+     res.send({
+         status : 200,
+         message : {
+             ru : "Пользователи",
+             en : "Users",
+             uz : "Foydalanuvchilar"
+         },
+         success : true,
+         data : await UserSchema.find().sort({createdAt : -1})
+     })
+    }catch(error){
+         res.send(ErrorResp(err))
+    }
+
+}
+
+
+    
     static async GetMyProfile(req, res){
         try {
             const {token} = req.headers;
